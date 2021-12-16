@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using FRISS.Models;
+using FRISS.Common.Models;
 
 namespace Friss.Handler
 {

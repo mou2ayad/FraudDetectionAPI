@@ -1,9 +1,10 @@
 ﻿using System;
 
-namespace FRISS.Models
+namespace FRISS.DataAccessLayer
 {
-    public class Person
+    public class PersonDAO
     {
+        public string Id { set; get; }
         public string FirstName { set; get; }
         public string LastName { set; get; }
         public DateTime? DateOfBirth { set; get; }

@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using AutoMapper;
 using FRISS.Common.Models;
+using FRISS.DataAccessLayer.Context;
 
 namespace FRISS.DataAccessLayer.Profiles
 {
@@ -10,8 +9,10 @@ namespace FRISS.DataAccessLayer.Profiles
     {
         public PersonProfile()
         {
-            CreateMap<Person, PersonDAO>().ReverseMap();
+            CreateMap<Person, PersonDAO>()
+                .ForMember(dest => dest.CreationDate, opt => opt.MapFrom(src => DateTime.UtcNow));
+            CreateMap<PersonDAO, Person>();
         }
-
+          
     }
 }

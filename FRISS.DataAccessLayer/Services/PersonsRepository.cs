@@ -1,5 +1,8 @@
-﻿using AutoMapper;
+﻿using System;
+using System.Threading.Tasks;
+using AutoMapper;
 using FRISS.Common.Models;
+using FRISS.DataAccessLayer.Context;
 using FRISS.DataAccessLayer.Contracts;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -8,28 +11,40 @@ namespace FRISS.DataAccessLayer.Services
 {
     public class PersonsRepository
     {
-        private readonly IPersonsDbClient _personsDbClient;
+        private readonly IFraudStorage _fraudStorage;
         private readonly IMapper _mapper;
         private readonly ILogger<PersonsRepository> _logger;
-        public PersonsRepository(IPersonsDbClient personsDbClient, IMapper mapper, ILogger<PersonsRepository> logger)
+        public PersonsRepository(IFraudStorage fraudStorage , IMapper mapper, ILogger<PersonsRepository> logger)
         {
-            _personsDbClient = personsDbClient;
+            _fraudStorage = fraudStorage;
             _mapper = mapper;
             _logger = logger;
         }
 
-        public bool AddPerson(Person person)
+        public async Task<string> AddPerson(Person person)
         {
             if (person == null)
             {
-                _logger.LogWarning("Can't insert person with null value to db");
-                return false;
+                _logger.LogWarning("Can't insert person with null value into db");
+                return null;
             }
             var personDAO=_mapper.Map<PersonDAO>(person);
-            var id=_personsDbClient.InsertPerson(personDAO);
+            personDAO.CreationDate=DateTime.UtcNow;
+            var id=await _fraudStorage.InsertPerson(personDAO);
             _logger.LogInformation("A new Person has been inserted to DB with Id {0} and data: [{1}]", id,
                 JsonConvert.SerializeObject(person));
-            return true;
+            return id;
+        }
+
+        public async Task<Person> GetPersonById(string id)
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                _logger.LogWarning("Can't get person with Id = null");
+                return null;
+            }
+            var personDao= await _fraudStorage.GetPersonById(id);
+            return _mapper.Map<Person>(personDao);
         }
 
     }

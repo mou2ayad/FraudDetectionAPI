@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FRISS.DataAccessLayer
+namespace FRISS.DataAccessLayer.Context
 {
     public class PersonDAO
     {
@@ -9,5 +9,6 @@ namespace FRISS.DataAccessLayer
         public string LastName { set; get; }
         public DateTime? DateOfBirth { set; get; }
         public string IdentificationNumber { set; get; }
+        public DateTime CreationDate { set; get; }
     }
 }

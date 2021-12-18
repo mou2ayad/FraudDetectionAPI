@@ -4,10 +4,6 @@ namespace FRISS.Common.Models
 {
     public class Person :IEquatable<Person>
     {
-        //internal Person()
-        //{
-        //}
-
         public Person(string firstName,string lastName, DateTime? dateOfBirth=null,string identificationNumber=null)
         {
             FirstName = firstName;

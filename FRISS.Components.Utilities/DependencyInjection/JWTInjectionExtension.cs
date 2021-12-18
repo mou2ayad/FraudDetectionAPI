@@ -4,9 +4,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace FRISS.Components.Utilities.DependencyInjection
 {
-    public static class JWTInjectionExtension
+    public static class JwtInjectionExtension
     {
-        public static void InjectJWTService(this IServiceCollection services,IConfiguration configuration) =>    
+        public static void InjectJwtService(this IServiceCollection services,IConfiguration configuration) =>    
             services.Configure<JwtSettings>(configuration.GetSection("JWT"));
     }
 

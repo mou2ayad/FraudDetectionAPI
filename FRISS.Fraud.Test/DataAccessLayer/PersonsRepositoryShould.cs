@@ -25,9 +25,11 @@ namespace FRISS.Fraud.Test.DataAccessLayer
             var person = CreatePerson();
 
             var id=await sut.AddPerson(person);
+            var addedPerson = storage.Db.FirstOrDefault(e => e.Id == id);
 
             id.Should().NotBeNull();
-            storage.Db.Any(e => e.Id == id).Should().BeTrue();
+            addedPerson.Should().NotBeNull();
+            addedPerson.CreationDate.Should().NotBe(default);
             logger.AddedLogLevel.Should().Be(LogLevel.Information);
             logger.LoggedMessage.Should().StartWith($"A new Person has been inserted to DB with Id {id}");
         }

@@ -9,7 +9,7 @@ using Newtonsoft.Json;
 
 namespace FRISS.DataAccessLayer.Services
 {
-    public class PersonsRepository
+    public class PersonsRepository : IPersonsRepository
     {
         private readonly IFraudStorage _fraudStorage;
         private readonly IMapper _mapper;

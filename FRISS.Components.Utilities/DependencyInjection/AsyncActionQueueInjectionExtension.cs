@@ -6,7 +6,6 @@ namespace FRISS.Components.Utilities.DependencyInjection
     public static class AsyncActionQueueInjectionExtension
     {
         public static void InjectAsyncActionQueueServices(this IServiceCollection services) =>
-            services.AddSingleton<IAsyncActionQueue, AsyncActionQueue>();           
-        
+            services.AddSingleton<IAsyncActionQueue, AsyncActionQueue>();
     }
 }

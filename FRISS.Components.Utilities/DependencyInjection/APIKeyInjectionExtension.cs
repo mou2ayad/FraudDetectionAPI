@@ -3,12 +3,11 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace FRISS.Components.Utilities.DependencyInjection
 {
-    public static class APIKeyInjectionExtension
+    public static class ApiKeyInjectionExtension
     {
-        public static void InjectAPIKeyService(this IServiceCollection services)=>            
+        public static void InjectApiKeyService(this IServiceCollection services)=>            
             services.AddSingleton<IAPIKeyValidator, APIKeyValidator>();
         
-       
     }
 
 }

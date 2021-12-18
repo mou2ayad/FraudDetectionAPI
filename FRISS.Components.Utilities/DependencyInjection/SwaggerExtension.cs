@@ -8,48 +8,46 @@ namespace FRISS.Components.Utilities.DependencyInjection
 {
     public static class SwaggerExtension
     {
-        public static void InjectSwaggerServices(this IServiceCollection services, string APITitle, IConfiguration configuration)
+        public static void InjectSwaggerServices(this IServiceCollection services, string apiTitle, IConfiguration configuration)
         {
 
-            var EnvironmentType = "";
-            if (EnvironmentType.ToLower() != "prod")
+            OpenApiInfo swaggerDoc = new OpenApiInfo()
             {
-                OpenApiInfo swaggerDoc = new OpenApiInfo()
+                Title = apiTitle,
+                Version = configuration.GetValue<string>("Swagger:Version"),
+                Description = configuration.GetValue<string>("Swagger:Description")
+            };
+            if (configuration.GetSection("Swagger:Contact").Exists())
+            {
+                Uri uri;
+                Uri.TryCreate(configuration.GetValue<string>("Swagger:Contact:Url"), UriKind.Absolute, out uri);
+                swaggerDoc.Contact = new OpenApiContact()
                 {
-                    Title = APITitle,
-                    Version = configuration.GetValue<string>("Swagger:Version") ?? "v1",
-                    Description = configuration.GetValue<string>("Swagger:Description") ?? APITitle + " Description"
+                    Name = configuration.GetValue<string>("Swagger:Contact:Name"),
+                    Email = configuration.GetValue<string>("Swagger:Contact:Email"),
+                    Url = uri
                 };
-                if (configuration.GetSection("Swagger:Contact").Exists())
+            }
+            var jwtAuth = configuration.GetValue<bool>("Swagger:JWTAuthentication");
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc(swaggerDoc.Version, swaggerDoc);
+                if (jwtAuth)
                 {
-                    Uri uri = null;
-                    Uri.TryCreate(configuration.GetValue<string>("Swagger:Contact:Url"), UriKind.Absolute, out uri);
-                    swaggerDoc.Contact = new OpenApiContact()
+                    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                     {
-                        Name = configuration.GetValue<string>("Swagger:Contact:Name") ?? "Monster",
-                        Email = configuration.GetValue<string>("Swagger:Contact:Email") ?? "Monster@monster.com",
-                        Url = uri
-                    };
-                }
-                var jwtAuth = configuration.GetValue<bool>("Swagger:JWTAuthentication");
-                services.AddSwaggerGen(c =>
-                {
-                    c.SwaggerDoc(swaggerDoc.Version, swaggerDoc);
-                    if (jwtAuth)
-                    {
-                        c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-                        {
-                            Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
-                            Name = "Authorization",
-                            In = ParameterLocation.Header,
-                            Type = SecuritySchemeType.ApiKey,
-                            Scheme = "Bearer",
+                        Description =
+                            "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
+                        Name = "Authorization",
+                        In = ParameterLocation.Header,
+                        Type = SecuritySchemeType.ApiKey,
+                        Scheme = "Bearer",
 
-                        });
-                        c.AddSecurityRequirement(new OpenApiSecurityRequirement()
+                    });
+                    c.AddSecurityRequirement(new OpenApiSecurityRequirement()
+                    {
+
                         {
-                           
-                            {
                             new OpenApiSecurityScheme
                             {
                                 Reference = new OpenApiReference
@@ -65,14 +63,8 @@ namespace FRISS.Components.Utilities.DependencyInjection
                         }
 
                     });
-                    }
-
-
-                });
-
-            }
-
+                }
+            });
         }
-
     }
 }

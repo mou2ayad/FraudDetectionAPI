@@ -13,16 +13,19 @@ namespace FRISS.DataAccessLayer.Services
         private readonly IPersonsRepository _personsRepository;
         private readonly ICache _cache;
         private readonly StorageConfig _config;
-        public CachePersonsRepositoryDecorator(IPersonsRepository personsRepository, ICache cache, IOptions<StorageConfig> options)
+
+        public CachePersonsRepositoryDecorator(IPersonsRepository personsRepository, ICache cache,
+            IOptions<StorageConfig> options)
         {
             _personsRepository = personsRepository;
             _cache = cache;
             _config = options.Value;
         }
+
         public async Task<string> AddPerson(Person person)
         {
-            var personId=await _personsRepository.AddPerson(person);
-            await SetCache(personId,person);
+            var personId = await _personsRepository.AddPerson(person);
+            await SetCache(personId, person);
             return personId;
         }
 
@@ -40,9 +43,7 @@ namespace FRISS.DataAccessLayer.Services
 
         private string GetCacheKey(string personId) => $"person_{personId}";
 
-        protected virtual DateTime UtcNow => DateTime.UtcNow;
-
-        private Task SetCache(string personId, Person person)=> _cache.Set(GetCacheKey(personId), person,
-            UtcNow.AddMinutes(_config.ExpireAfterInMinutes).Date.Subtract(UtcNow));
+        private Task SetCache(string personId, Person person) => _cache.Set(GetCacheKey(personId), person,
+            TimeSpan.FromMinutes(_config.ExpireAfterInMinutes));
     }
 }

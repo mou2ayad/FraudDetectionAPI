@@ -6,7 +6,7 @@ namespace FRISS.NamesSimilarity.Services
 {
     public class NickNameDetectorService : INameSimilarity
     {
-        public NameSimilarityServiceType Type => NameSimilarityServiceType.NickName;
+        public SimilarityServiceType Type => SimilarityServiceType.NickName;
 
         private bool IsNickName(string name, string anotherName) =>
             CommonNicknameDb.Db.Contains(SimilarNamesPair.Create(name, anotherName));

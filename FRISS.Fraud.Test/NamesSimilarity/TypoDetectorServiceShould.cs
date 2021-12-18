@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
-using FRISS.NamesSimilarity;
+using FRISS.NamesSimilarity.Configuration;
+using FRISS.NamesSimilarity.Models;
 using FRISS.NamesSimilarity.Services;
 using Microsoft.Extensions.Options;
 using NUnit.Framework;

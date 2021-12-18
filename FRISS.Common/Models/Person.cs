@@ -1,16 +1,19 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace FRISS.Common.Models
 {
-    public class Person :IEquatable<Person>
+    public class Person : IEquatable<Person>, IMatchable
     {
-        public Person(string firstName,string lastName, DateTime? dateOfBirth=null,string identificationNumber=null)
+        public Person(string firstName, string lastName, DateTime? dateOfBirth = null,
+            string identificationNumber = null)
         {
             FirstName = firstName;
             LastName = lastName;
             DateOfBirth = dateOfBirth;
             IdentificationNumber = identificationNumber;
         }
+
         public string FirstName { get; }
         public string LastName { get; }
         public DateTime? DateOfBirth { get; }
@@ -37,5 +40,14 @@ namespace FRISS.Common.Models
         {
             return HashCode.Combine(FirstName, LastName, DateOfBirth, IdentificationNumber);
         }
+
+        public IEnumerable<string> OrderedPropertiesToMatch =>
+            new[]
+            {
+                nameof(FirstName),
+                nameof(LastName),
+                nameof(DateOfBirth),
+                nameof(IdentificationNumber)
+            };
     }
 }

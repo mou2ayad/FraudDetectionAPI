@@ -1,4 +1,4 @@
-﻿namespace FRISS.NamesSimilarity
+﻿namespace FRISS.NamesSimilarity.Configuration
 {
     public class TypoDetectorConfig
     {

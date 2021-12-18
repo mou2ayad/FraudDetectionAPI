@@ -21,8 +21,4 @@
     <ProjectReference Include="..\FRISS.NamesSimilarity\FRISS.NamesSimilarity.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Utilities\" />
-  </ItemGroup>
-
 </Project>

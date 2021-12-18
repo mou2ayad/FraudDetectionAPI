@@ -1,6 +1,6 @@
 ﻿namespace FRISS.NamesSimilarity.Models
 {
-    public enum NameSimilarityServiceType
+    public enum SimilarityServiceType
     {
         Initials,
         Typo,

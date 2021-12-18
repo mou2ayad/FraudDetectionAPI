@@ -1,4 +1,5 @@
 ﻿using System;
+using FRISS.NamesSimilarity.Configuration;
 using FRISS.NamesSimilarity.Contracts;
 using FRISS.NamesSimilarity.Models;
 using Microsoft.Extensions.Options;
@@ -11,7 +12,7 @@ namespace FRISS.NamesSimilarity.Services
 
         public TypoDetectorService(IOptions<TypoDetectorConfig> config) => _config = config.Value;
 
-        public NameSimilarityServiceType Type => NameSimilarityServiceType.Typo;
+        public SimilarityServiceType Type => SimilarityServiceType.Typo;
 
         public bool Match(string name, string anotherName) => PossibleTypo(name, anotherName);
 

@@ -10,7 +10,7 @@ namespace FRISS.NamesSimilarity.Services
         public bool Match(string name, string anotherName)
             => PossibleInitial(name, anotherName);
 
-        public NameSimilarityServiceType Type => NameSimilarityServiceType.Initials;
+        public SimilarityServiceType Type => SimilarityServiceType.Initials;
 
         private bool PossibleInitial(string name, string anotherName)
         {

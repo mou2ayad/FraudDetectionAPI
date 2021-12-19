@@ -1,10 +1,10 @@
 ﻿using System;
-using FRISS.NamesSimilarity.Configuration;
-using FRISS.NamesSimilarity.Contracts;
-using FRISS.NamesSimilarity.Models;
+using Fraud.Component.Matching.Configuration;
+using Fraud.Component.Matching.Contracts;
+using Fraud.Component.Matching.Models;
 using Microsoft.Extensions.Options;
 
-namespace FRISS.NamesSimilarity.Services
+namespace Fraud.Component.Matching.Services
 {
     public class TypoDetectorService :INameSimilarity
     {

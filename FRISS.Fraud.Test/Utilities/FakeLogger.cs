@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Extensions.Logging;
 
-namespace FRISS.Fraud.Test.Utilities
+namespace Fraud.Test.Utilities
 {
     public class FakeLogger<T> : ILogger<T>, IDisposable
     {

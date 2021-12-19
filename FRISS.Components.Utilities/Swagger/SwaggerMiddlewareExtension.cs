@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 
-namespace FRISS.Components.Utilities.Swagger
+namespace Fraud.Component.Utilities.Swagger
 {
     public static class SwaggerMiddlewareExtension
     {

@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Threading.Tasks;
-using FRISS.Common.Models;
-using FRISS.Components.Utilities.Cache;
-using FRISS.DataAccessLayer.Config;
-using FRISS.DataAccessLayer.Contracts;
+using Fraud.Component.Common.Models;
+using Fraud.Component.DataAccessLayer.Config;
+using Fraud.Component.DataAccessLayer.Contracts;
+using Fraud.Component.Utilities.Cache;
 using Microsoft.Extensions.Options;
 
-namespace FRISS.DataAccessLayer.Services
+namespace Fraud.Component.DataAccessLayer.Services
 {
     public class CachePersonsRepositoryDecorator : IPersonsRepository
     {

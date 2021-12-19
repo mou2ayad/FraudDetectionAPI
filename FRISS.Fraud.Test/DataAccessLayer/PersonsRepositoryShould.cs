@@ -3,16 +3,16 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using FluentAssertions;
-using FRISS.Common.Models;
-using FRISS.DataAccessLayer.Context;
-using FRISS.DataAccessLayer.Contracts;
-using FRISS.DataAccessLayer.Profiles;
-using FRISS.DataAccessLayer.Services;
-using FRISS.Fraud.Test.Utilities;
+using Fraud.Component.Common.Models;
+using Fraud.Component.DataAccessLayer.Context;
+using Fraud.Component.DataAccessLayer.Contracts;
+using Fraud.Component.DataAccessLayer.Profiles;
+using Fraud.Component.DataAccessLayer.Services;
+using Fraud.Test.Utilities;
 using Microsoft.Extensions.Logging;
 using NUnit.Framework;
 
-namespace FRISS.Fraud.Test.DataAccessLayer
+namespace Fraud.Test.DataAccessLayer
 {
     public class PersonsRepositoryShould
     {
@@ -109,7 +109,7 @@ namespace FRISS.Fraud.Test.DataAccessLayer
         private static Person CreatePerson()=>
             new("Andrew", "Craw", new DateTime(1985, 2, 20), "931212312");
 
-        private static PersonDAO CreatePersonDao(string id) => new()
+        private static PersonDao CreatePersonDao(string id) => new()
         {
             FirstName = "Andrew", LastName = "Craw", DateOfBirth = new DateTime(1985, 2, 20),
             CreationDate = DateTime.UtcNow, Id = id, IdentificationNumber = "931212312"

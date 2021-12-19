@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.Extensions.Caching.Memory;
 
-namespace FRISS.Components.Utilities.Cache
+namespace Fraud.Component.Utilities.Cache
 {
     public class InMemoryCache : ICache
     {

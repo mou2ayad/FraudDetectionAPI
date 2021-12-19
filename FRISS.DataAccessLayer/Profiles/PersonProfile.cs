@@ -1,17 +1,17 @@
 ﻿using System;
 using AutoMapper;
-using FRISS.Common.Models;
-using FRISS.DataAccessLayer.Context;
+using Fraud.Component.Common.Models;
+using Fraud.Component.DataAccessLayer.Context;
 
-namespace FRISS.DataAccessLayer.Profiles
+namespace Fraud.Component.DataAccessLayer.Profiles
 {
     public class PersonProfile : Profile
     {
         public PersonProfile()
         {
-            CreateMap<Person, PersonDAO>()
+            CreateMap<Person, PersonDao>()
                 .ForMember(dest => dest.CreationDate, opt => opt.MapFrom(src => DateTime.UtcNow));
-            CreateMap<PersonDAO, Person>();
+            CreateMap<PersonDao, Person>();
         }
           
     }

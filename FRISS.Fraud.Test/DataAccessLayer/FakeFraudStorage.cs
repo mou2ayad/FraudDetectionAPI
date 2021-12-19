@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using FRISS.DataAccessLayer.Context;
-using FRISS.DataAccessLayer.Contracts;
+using Fraud.Component.DataAccessLayer.Context;
+using Fraud.Component.DataAccessLayer.Contracts;
 
-namespace FRISS.Fraud.Test.DataAccessLayer
+namespace Fraud.Test.DataAccessLayer
 {
     public class FakeFraudStorage : IFraudStorage
     {
@@ -16,8 +16,8 @@ namespace FRISS.Fraud.Test.DataAccessLayer
 
         public static FakeFraudStorage Create() => new();
 
-        public List<PersonDAO> Db = new();
-        public virtual Task<string> InsertPerson(PersonDAO data)
+        public List<PersonDao> Db = new();
+        public virtual Task<string> InsertPerson(PersonDao data)
         {
             data.Id = "123456789";
             Db.Add(data);
@@ -25,14 +25,14 @@ namespace FRISS.Fraud.Test.DataAccessLayer
             return Task.FromResult(data.Id);
         }
 
-        public virtual Task<PersonDAO> GetPersonById(string id)
+        public virtual Task<PersonDao> GetPersonById(string id)
         {
             CallGetPerson = true;
             return Task.FromResult(Db.FirstOrDefault(e => e.Id == id));
         }
         
 
-        public FakeFraudStorage With(PersonDAO personDao)
+        public FakeFraudStorage With(PersonDao personDao)
         {
             Db.Add(personDao);
             return this;

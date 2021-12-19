@@ -1,10 +1,9 @@
 ﻿using System;
 
-namespace FRISS.Components.Utilities.ErrorHandling
+namespace Fraud.Component.Utilities.ErrorHandling
 {
     public static class ClientExceptionExtension
     {
-      
         public static Exception MarkAsClientException(this Exception exception)
         {
             if(!exception.Data.Contains("ClientException"))

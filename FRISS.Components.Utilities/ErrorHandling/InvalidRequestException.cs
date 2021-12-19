@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FRISS.Components.Utilities.ErrorHandling
+namespace Fraud.Component.Utilities.ErrorHandling
 {
     public class InvalidRequestException: Exception
     {

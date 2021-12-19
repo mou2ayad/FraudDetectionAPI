@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Enyim.Caching;
 using Microsoft.Extensions.Logging;
 
-namespace FRISS.Components.Utilities.Cache
+namespace Fraud.Component.Utilities.Cache
 {
     public class DistributedCache : ICache
     {

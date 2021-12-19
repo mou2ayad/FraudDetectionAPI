@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using Enyim.Caching.Configuration;
-using FRISS.Components.Utilities.APIKey;
-using FRISS.Components.Utilities.Cache;
+using Fraud.Component.Utilities.Cache;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace FRISS.Components.Utilities.DependencyInjection
+namespace Fraud.Component.Utilities.DependencyInjection
 {
     public static class CacheInjectionExtension
     {

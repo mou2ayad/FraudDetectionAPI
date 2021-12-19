@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FRISS.NamesSimilarity.Database
+namespace Fraud.Component.Matching.Database
 {
     public class SimilarNamesPair : IEquatable<SimilarNamesPair>
     {

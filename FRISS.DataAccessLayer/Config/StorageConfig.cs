@@ -1,4 +1,4 @@
-﻿namespace FRISS.DataAccessLayer.Config
+﻿namespace Fraud.Component.DataAccessLayer.Config
 {
     public class StorageConfig
     {

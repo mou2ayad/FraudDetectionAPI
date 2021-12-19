@@ -1,8 +1,8 @@
 ﻿using FluentAssertions;
-using FRISS.NamesSimilarity.Services;
+using Fraud.Component.Matching.Services;
 using NUnit.Framework;
 
-namespace FRISS.Fraud.Test.NamesSimilarity
+namespace Fraud.Test.NamesSimilarity
 {
     public class InitialsMatchingServiceShould
     {

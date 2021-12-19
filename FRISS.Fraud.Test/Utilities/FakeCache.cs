@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
-using FRISS.Components.Utilities.Cache;
+using Fraud.Component.Utilities.Cache;
 using Newtonsoft.Json;
 
-namespace FRISS.Fraud.Test.Utilities
+namespace Fraud.Test.Utilities
 {
     public class FakeCache : ICache
     {

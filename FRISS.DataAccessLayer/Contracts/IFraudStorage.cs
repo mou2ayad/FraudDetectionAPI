@@ -1,13 +1,12 @@
 ﻿using System.Threading.Tasks;
-using FRISS.DataAccessLayer.Context;
+using Fraud.Component.DataAccessLayer.Context;
 
-namespace FRISS.DataAccessLayer.Contracts
+namespace Fraud.Component.DataAccessLayer.Contracts
 {
     public interface IFraudStorage
     {
-        Task<string> InsertPerson(PersonDAO data);
+        Task<string> InsertPerson(PersonDao data);
 
-        Task<PersonDAO> GetPersonById(string id);
-
+        Task<PersonDao> GetPersonById(string id);
     }
 }

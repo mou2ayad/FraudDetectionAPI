@@ -1,11 +1,10 @@
 ﻿using FluentAssertions;
-using FRISS.NamesSimilarity.Configuration;
-using FRISS.NamesSimilarity.Models;
-using FRISS.NamesSimilarity.Services;
+using Fraud.Component.Matching.Configuration;
+using Fraud.Component.Matching.Services;
 using Microsoft.Extensions.Options;
 using NUnit.Framework;
 
-namespace FRISS.Fraud.Test.NamesSimilarity
+namespace Fraud.Test.NamesSimilarity
 {
     public class TypoDetectorServiceShould
     {

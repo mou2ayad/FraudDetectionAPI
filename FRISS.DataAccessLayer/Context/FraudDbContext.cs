@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace FRISS.DataAccessLayer.Context
+namespace Fraud.Component.DataAccessLayer.Context
 {
     public class FraudDbContext : DbContext
     {
@@ -9,6 +9,6 @@ namespace FRISS.DataAccessLayer.Context
         {
         }
 
-        public DbSet<PersonDAO> Persons { get; set; }
+        public DbSet<PersonDao> Persons { get; set; }
     }
 }

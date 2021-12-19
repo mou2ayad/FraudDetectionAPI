@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using FRISS.Common.Contracts;
-using FRISS.Common.Models;
-using FRISS.NamesSimilarity.Contracts;
-using FRISS.NamesSimilarity.Models;
+using Fraud.Component.Common.Contracts;
+using Fraud.Component.Matching.Contracts;
+using Fraud.Component.Matching.Models;
 
-namespace FRISS.NamesSimilarity.Services
+namespace Fraud.Component.Matching.Services
 {
     public class MatchingService<T> where T :IMatchable
     {

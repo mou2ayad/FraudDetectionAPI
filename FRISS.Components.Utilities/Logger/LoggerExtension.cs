@@ -5,7 +5,7 @@ using System.Reflection;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
-namespace FRISS.Components.Utilities.Logger
+namespace Fraud.Component.Utilities.Logger
 {
     public static class LoggerExtension
     {

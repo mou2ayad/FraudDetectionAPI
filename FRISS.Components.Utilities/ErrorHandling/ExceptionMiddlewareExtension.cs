@@ -8,7 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
-namespace FRISS.Components.Utilities.ErrorHandling
+namespace Fraud.Component.Utilities.ErrorHandling
 {
     public static class ExceptionMiddlewareExtention
     {

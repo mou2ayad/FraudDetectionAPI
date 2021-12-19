@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace FRISS.Common.Contracts
+namespace Fraud.Component.Common.Contracts
 {
     public interface IMatchable
     {

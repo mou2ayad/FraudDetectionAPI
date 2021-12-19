@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using FluentAssertions;
-using FRISS.Common.Models;
-using FRISS.NamesSimilarity.Configuration;
-using FRISS.NamesSimilarity.Contracts;
-using FRISS.NamesSimilarity.Models;
-using FRISS.NamesSimilarity.Services;
+using Fraud.Component.Common.Models;
+using Fraud.Component.Matching.Configuration;
+using Fraud.Component.Matching.Contracts;
+using Fraud.Component.Matching.Models;
+using Fraud.Component.Matching.Services;
 using Microsoft.Extensions.Options;
 using NUnit.Framework;
 
-namespace FRISS.Fraud.Test.Matching
+namespace Fraud.Test.Matching
 {
     public class MatchingServiceShould
     {

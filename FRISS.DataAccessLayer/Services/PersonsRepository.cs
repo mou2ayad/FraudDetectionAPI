@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Threading.Tasks;
 using AutoMapper;
-using FRISS.Common.Models;
-using FRISS.DataAccessLayer.Context;
-using FRISS.DataAccessLayer.Contracts;
+using Fraud.Component.Common.Models;
+using Fraud.Component.DataAccessLayer.Context;
+using Fraud.Component.DataAccessLayer.Contracts;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
-namespace FRISS.DataAccessLayer.Services
+namespace Fraud.Component.DataAccessLayer.Services
 {
     public class PersonsRepository : IPersonsRepository
     {
@@ -28,7 +28,7 @@ namespace FRISS.DataAccessLayer.Services
                 _logger.LogWarning("Can't insert person with null value into db");
                 return null;
             }
-            var personDAO=_mapper.Map<PersonDAO>(person);
+            var personDAO=_mapper.Map<PersonDao>(person);
             personDAO.CreationDate=DateTime.UtcNow;
             var id=await _fraudStorage.InsertPerson(personDAO);
             _logger.LogInformation("A new Person has been inserted to DB with Id {0} and data: [{1}]", id,

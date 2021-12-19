@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using FRISS.Common.Contracts;
+using Fraud.Component.Common.Contracts;
 
-namespace FRISS.Common.Models
+namespace Fraud.Component.Common.Models
 {
     public class Person : IEquatable<Person>, IMatchable
     {

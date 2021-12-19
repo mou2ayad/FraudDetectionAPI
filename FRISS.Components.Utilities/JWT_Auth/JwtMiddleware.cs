@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
-namespace FRISS.Components.Utilities.JWT_Auth
+namespace Fraud.Component.Utilities.JWT_Auth
 {
     public class JwtMiddleware
     {

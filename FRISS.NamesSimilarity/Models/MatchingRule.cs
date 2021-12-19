@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace FRISS.NamesSimilarity.Models
+namespace Fraud.Component.Matching.Models
 {
     public class MatchingRule
     {

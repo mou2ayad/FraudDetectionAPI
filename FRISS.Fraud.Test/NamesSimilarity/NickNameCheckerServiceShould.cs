@@ -1,8 +1,8 @@
-using FRISS.NamesSimilarity.Services;
-using NUnit.Framework;
 using FluentAssertions;
+using Fraud.Component.Matching.Services;
+using NUnit.Framework;
 
-namespace FRISS.Fraud.Test.NamesSimilarity
+namespace Fraud.Test.NamesSimilarity
 {
     public class NickNameCheckerServiceShould
     {
@@ -22,7 +22,6 @@ namespace FRISS.Fraud.Test.NamesSimilarity
             isNickName.Should().Be(expected);
 
         }
-
         public static NickNameDetectorService Sut() => new();
     }
 }

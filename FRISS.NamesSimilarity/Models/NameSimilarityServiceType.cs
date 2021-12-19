@@ -1,4 +1,4 @@
-﻿namespace FRISS.NamesSimilarity.Models
+﻿namespace Fraud.Component.Matching.Models
 {
     public enum SimilarityServiceType
     {

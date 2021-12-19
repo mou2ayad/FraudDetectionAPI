@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace FRISS.DataAccessLayer.Context
+namespace Fraud.Component.DataAccessLayer.Context
 {
-    public class PersonDAO
+    public class PersonDao
     {
         public string Id { set; get; }
         public string FirstName { set; get; }

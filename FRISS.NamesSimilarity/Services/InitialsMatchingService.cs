@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Text.RegularExpressions;
-using FRISS.NamesSimilarity.Contracts;
-using FRISS.NamesSimilarity.Models;
+using Fraud.Component.Matching.Contracts;
+using Fraud.Component.Matching.Models;
 
-namespace FRISS.NamesSimilarity.Services
+namespace Fraud.Component.Matching.Services
 {
     public class InitialsMatchingService : INameSimilarity
     {

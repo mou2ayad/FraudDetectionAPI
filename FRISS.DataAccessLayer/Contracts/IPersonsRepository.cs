@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
-using FRISS.Common.Models;
+using Fraud.Component.Common.Models;
 
-namespace FRISS.DataAccessLayer.Contracts
+namespace Fraud.Component.DataAccessLayer.Contracts
 {
     public interface IPersonsRepository
     {

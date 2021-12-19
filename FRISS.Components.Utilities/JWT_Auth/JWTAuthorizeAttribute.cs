@@ -2,13 +2,13 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace FRISS.Components.Utilities.JWT_Auth
+namespace Fraud.Component.Utilities.JWT_Auth
 {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
-    public class JWTAuthorizeAttribute : Attribute, IAuthorizationFilter
+    public class JwtAuthorizeAttribute : Attribute, IAuthorizationFilter
     {
         private readonly string _permission;        
-        public JWTAuthorizeAttribute(string permission=null) => _permission = permission;
+        public JwtAuthorizeAttribute(string permission=null) => _permission = permission;
 
         public void OnAuthorization(AuthorizationFilterContext context)
         {

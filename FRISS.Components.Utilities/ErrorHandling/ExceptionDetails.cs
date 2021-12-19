@@ -1,7 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-namespace FRISS.Components.Utilities.ErrorHandling
+namespace Fraud.Component.Utilities.ErrorHandling
 {
     public class ExceptionDetails
     {
@@ -22,9 +22,7 @@ namespace FRISS.Components.Utilities.ErrorHandling
     public class HttpExceptionDetails : ExceptionDetails
     {
         public int StatusCode { get; set; }
-        public HttpExceptionDetails() : base()
-        {            
-        }
+
         public HttpExceptionDetails WithNolog()
         {
             ErrorCode = null;

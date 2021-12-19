@@ -1,4 +1,4 @@
-﻿namespace FRISS.NamesSimilarity.Configuration
+﻿namespace Fraud.Component.Matching.Configuration
 {
     public class TypoDetectorConfig
     {

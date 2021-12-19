@@ -1,7 +1,7 @@
 ﻿using System;
-using FRISS.Common.Models;
+using Fraud.Component.Common.Models;
 
-namespace FRISS.Fraud.Test
+namespace Fraud.Test
 {
     public class PersonBuilder
     {

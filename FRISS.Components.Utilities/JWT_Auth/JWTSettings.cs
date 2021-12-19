@@ -1,4 +1,4 @@
-﻿namespace FRISS.Components.Utilities.JWT_Auth
+﻿namespace Fraud.Component.Utilities.JWT_Auth
 {
     public class JwtSettings
     {

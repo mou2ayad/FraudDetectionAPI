@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace FRISS.Components.Utilities.Cache
+namespace Fraud.Component.Utilities.Cache
 {
     public interface ICache
     {

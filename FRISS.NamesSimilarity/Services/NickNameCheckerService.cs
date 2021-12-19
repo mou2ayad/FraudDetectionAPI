@@ -1,8 +1,8 @@
-﻿using FRISS.NamesSimilarity.Contracts;
-using FRISS.NamesSimilarity.Database;
-using FRISS.NamesSimilarity.Models;
+﻿using Fraud.Component.Matching.Contracts;
+using Fraud.Component.Matching.Database;
+using Fraud.Component.Matching.Models;
 
-namespace FRISS.NamesSimilarity.Services
+namespace Fraud.Component.Matching.Services
 {
     public class NickNameDetectorService : INameSimilarity
     {

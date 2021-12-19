@@ -1,6 +1,6 @@
-﻿using FRISS.NamesSimilarity.Models;
+﻿using Fraud.Component.Matching.Models;
 
-namespace FRISS.NamesSimilarity.Contracts
+namespace Fraud.Component.Matching.Contracts
 {
     public interface INameSimilarity
     {

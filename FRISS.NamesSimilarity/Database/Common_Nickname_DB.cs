@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace FRISS.NamesSimilarity.Database
+namespace Fraud.Component.Matching.Database
 {
     public static class CommonNicknameDb
     {

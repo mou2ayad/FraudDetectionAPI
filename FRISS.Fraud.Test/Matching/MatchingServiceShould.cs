@@ -38,9 +38,9 @@ namespace FRISS.Fraud.Test.Matching
             matchingScore.Should().Be(40);
         }
 
-        [TestCase("A.",Description = "similarity in first name as (initials)")]
-        [TestCase("Andew", Description = "similarity in first name as (typo)")]
-        [TestCase("Andy", Description = "similarity in first name as (diminutive)")]
+        [TestCase("A.",Description = "similarity in first name (initials)")]
+        [TestCase("Andew", Description = "similarity in first name (typo)")]
+        [TestCase("Andy", Description = "similarity in first name (diminutive)")]
         public void Match_Date_of_Birth_and_last_name_with_similar_firstName(string secondPersonName)
         {
             var sut = Sut();
@@ -64,6 +64,21 @@ namespace FRISS.Fraud.Test.Matching
             matchingScore.Should().Be(100);
         }
 
+        [TestCase("A.",8, Description = "similarity in first name (initials) with 8 as expected score")]
+        [TestCase("Andew",15, Description = "similarity in first name (typo) with 15 as expected score")]
+        [TestCase("Andy",10, Description = "similarity in first name (diminutive) with 10 as expected score")]
+        public void Match_similar_firstName_with_diff_similarity_rules_values(string secondPersonName,decimal expectedMatchScore)
+        {
+            OverrideSimilarityRulesValues();
+            var sut = Sut();
+            var firstPerson = PersonBuilder.Create("Andrew", "Craw").Build();
+            var secondPerson = PersonBuilder.Create(secondPersonName, "Smith").Build();
+
+            decimal matchingScore = sut.Match(firstPerson, secondPerson);
+
+            matchingScore.Should().Be(expectedMatchScore);
+        }
+
         public static MatchingService<Person> Sut()
             => new(GetSimilarityServices());
 
@@ -77,7 +92,7 @@ namespace FRISS.Fraud.Test.Matching
         
         private static void FillMatchingRules()
         {
-            MatchingRules.Set(
+            MatchingRules.SetRange(
                 MatchingRule.From("FirstName", 20).With(
                     SimilarityRule.From(SimilarityServiceType.Initials, 15),
                     SimilarityRule.From(SimilarityServiceType.NickName, 15),
@@ -86,6 +101,16 @@ namespace FRISS.Fraud.Test.Matching
                 MatchingRule.From("LastName", 40),
                 MatchingRule.From("DateOfBirth", 40),
                 MatchingRule.From("IdentificationNumber", 100));
+        }
+
+        private static void OverrideSimilarityRulesValues()
+        {
+            MatchingRules.Set(
+                MatchingRule.From("FirstName", 20).With(
+                    SimilarityRule.From(SimilarityServiceType.Initials, 8),
+                    SimilarityRule.From(SimilarityServiceType.NickName, 10),
+                    SimilarityRule.From(SimilarityServiceType.Typo, 15)
+                ));
         }
     }
 }

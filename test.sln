@@ -5,15 +5,19 @@ VisualStudioVersion = 16.0.31410.357
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Friss", "test\Friss.csproj", "{8F27F927-83D1-47E6-BDF6-914D97F4A60A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fraud.Component.Matching", "FRISS.NamesSimilarity\Fraud.Component.Matching.csproj", "{950BB00C-EA90-4C2A-AE66-110649339D2F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fraud.Component.Matching", "src\Fraud.Component.Matching\Fraud.Component.Matching.csproj", "{950BB00C-EA90-4C2A-AE66-110649339D2F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fraud.Component.Utilities", "FRISS.Components.Utilities\Fraud.Component.Utilities.csproj", "{DD6B562E-09AC-43C7-B11C-D8C943789F5E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fraud.Component.Utilities", "src\Fraud.Component.Utilities\Fraud.Component.Utilities.csproj", "{DD6B562E-09AC-43C7-B11C-D8C943789F5E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fraud.Test", "FRISS.Fraud.Test\Fraud.Test.csproj", "{ECAAACCD-43EE-4E61-9EBE-07E511479C04}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fraud.Test", "Testing\FRISS.Fraud.Test\Fraud.Test.csproj", "{ECAAACCD-43EE-4E61-9EBE-07E511479C04}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fraud.Component.DataAccessLayer", "FRISS.DataAccessLayer\Fraud.Component.DataAccessLayer.csproj", "{EC335374-6435-4770-A2C7-94DB0550885D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fraud.Component.DataAccessLayer", "src\Fraud.Component.DataAccessLayer\Fraud.Component.DataAccessLayer.csproj", "{EC335374-6435-4770-A2C7-94DB0550885D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fraud.Component.Common", "FRISS.Common\Fraud.Component.Common.csproj", "{FED7D4CB-6D6B-4F73-B74F-D03593A75683}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fraud.Component.Common", "src\Fraud.Component.Common\Fraud.Component.Common.csproj", "{FED7D4CB-6D6B-4F73-B74F-D03593A75683}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{6D8C8E02-6F04-45E1-A4DD-E54E35308DDB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{9BDF9A24-167F-451A-9F37-473D683B9C5A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -48,6 +52,14 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8F27F927-83D1-47E6-BDF6-914D97F4A60A} = {6D8C8E02-6F04-45E1-A4DD-E54E35308DDB}
+		{950BB00C-EA90-4C2A-AE66-110649339D2F} = {6D8C8E02-6F04-45E1-A4DD-E54E35308DDB}
+		{DD6B562E-09AC-43C7-B11C-D8C943789F5E} = {6D8C8E02-6F04-45E1-A4DD-E54E35308DDB}
+		{ECAAACCD-43EE-4E61-9EBE-07E511479C04} = {9BDF9A24-167F-451A-9F37-473D683B9C5A}
+		{EC335374-6435-4770-A2C7-94DB0550885D} = {6D8C8E02-6F04-45E1-A4DD-E54E35308DDB}
+		{FED7D4CB-6D6B-4F73-B74F-D03593A75683} = {6D8C8E02-6F04-45E1-A4DD-E54E35308DDB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0E6C6B16-6404-4472-B252-7842164182FA}

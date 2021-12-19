@@ -9,7 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FRISS.Common\Fraud.Component.Common.csproj" />
+    <ProjectReference Include="..\Fraud.Component.Common\Fraud.Component.Common.csproj" />
   </ItemGroup>
 
 </Project>

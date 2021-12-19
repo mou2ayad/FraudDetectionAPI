@@ -17,8 +17,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FRISS.DataAccessLayer\Fraud.Component.DataAccessLayer.csproj" />
-    <ProjectReference Include="..\FRISS.NamesSimilarity\Fraud.Component.Matching.csproj" />
+    <ProjectReference Include="..\..\src\Fraud.Component.DataAccessLayer\Fraud.Component.DataAccessLayer.csproj" />
+    <ProjectReference Include="..\..\src\Fraud.Component.Matching\Fraud.Component.Matching.csproj" />
+    <ProjectReference Include="..\..\src\Fraud.Component.Utilities\Fraud.Component.Utilities.csproj" />
+
   </ItemGroup>
 
 </Project>

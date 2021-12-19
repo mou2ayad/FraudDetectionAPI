@@ -13,8 +13,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FRISS.Common\Fraud.Component.Common.csproj" />
-    <ProjectReference Include="..\FRISS.Components.Utilities\Fraud.Component.Utilities.csproj" />
+    <ProjectReference Include="..\Fraud.Component.Common\Fraud.Component.Common.csproj" />
+    <ProjectReference Include="..\Fraud.Component.Utilities\Fraud.Component.Utilities.csproj" />
   </ItemGroup>
 
 </Project>

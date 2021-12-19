@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Fraud.Component.Common.Models;
+﻿using Fraud.Component.Common.Models;
 
 namespace Friss.Handler
 {

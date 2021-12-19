@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace FRISS.Common.Models
+namespace FRISS.Common.Contracts
 {
     public interface IMatchable
     {

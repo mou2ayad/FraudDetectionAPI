@@ -6,49 +6,44 @@ namespace FRISS.NamesSimilarity.Models
     {
         private static Dictionary<string,MatchingRule> _rules = new Dictionary<string,MatchingRule>();
 
+        public static void Set(params MatchingRule[] matchingRule)
+        {
+            if(matchingRule==null) return;
+            foreach (var rule in matchingRule)
+                Set(rule);
+        }
         public static void Set(MatchingRule rule)
         {
-            if (_rules.TryAdd(rule.AttributeName, rule))
-                _rules[rule.AttributeName] = rule;
+            if (_rules.TryAdd(rule.PropertyName, rule))
+                _rules[rule.PropertyName] = rule;
         }
 
-        public static MatchingRule Get(string ruleName)
+        public static MatchingRule Get(string propertyName)
         {
-            if (_rules.TryGetValue(ruleName, out MatchingRule value))
+            if (_rules.TryGetValue(propertyName, out MatchingRule value))
                 return value;
             return null;
         } 
 
 
-
-        //{
-        //    MatchingRule.From("FirstName", 20).With(
-        //        SimilarityRule.From(SimilarityServiceType.Initials,15),
-        //        SimilarityRule.From(SimilarityServiceType.NickName,15),
-        //        SimilarityRule.From(SimilarityServiceType.Typo,15)
-        //    ),
-        //    MatchingRule.From("LastName", 40),
-        //    MatchingRule.From("DateOfBirth", 40),
-        //    MatchingRule.From("IdentificationNumber", 100),
-        //};
     }
     public class MatchingRule
     {
-        private MatchingRule(string attributeName, decimal matchingScore)
+        private MatchingRule(string propertyName, decimal matchingScore)
         {
-            AttributeName = attributeName;
+            PropertyName = propertyName;
             MatchingScore = matchingScore;
         }
 
-        public static MatchingRule From(string attributeName, decimal matchingScore) 
-            => new MatchingRule(attributeName, matchingScore);
+        public static MatchingRule From(string propertyName, decimal matchingScore) 
+            => new MatchingRule(propertyName, matchingScore);
 
         public MatchingRule With(params SimilarityRule[] similarityRules)
         {
             SimilarityRules = similarityRules;
             return this;
         }
-        public string AttributeName { set; get; }
+        public string PropertyName { set; get; }
         public decimal MatchingScore { set; get; }
 
         public IEnumerable<SimilarityRule> SimilarityRules { set; get; }

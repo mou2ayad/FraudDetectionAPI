@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using FRISS.Common.Contracts;
 
 namespace FRISS.Common.Models
 {
@@ -44,10 +45,10 @@ namespace FRISS.Common.Models
         public IEnumerable<string> OrderedPropertiesToMatch =>
             new[]
             {
-                nameof(FirstName),
+                nameof(IdentificationNumber),
                 nameof(LastName),
                 nameof(DateOfBirth),
-                nameof(IdentificationNumber)
+                nameof(FirstName)
             };
     }
 }

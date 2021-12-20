@@ -1,14 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace Fraud.Component.Utilities.DependencyInjection
 {
     public static class SwaggerExtension
     {
-        public static IServiceCollection AddSwaggerService(this IServiceCollection services, string apiTitle, IConfiguration configuration)
+        public static readonly string CommentsDocPath = Path.Combine(AppContext.BaseDirectory, $"Fraud.Api.Matching.xml");
+
+        public static IServiceCollection AddSwaggerService(this IServiceCollection services, string apiTitle, IConfiguration configuration, Action<SwaggerGenOptions> setupAction=null)
         {
 
             OpenApiInfo swaggerDoc = new OpenApiInfo()
@@ -19,8 +23,7 @@ namespace Fraud.Component.Utilities.DependencyInjection
             };
             if (configuration.GetSection("Swagger:Contact").Exists())
             {
-                Uri uri;
-                Uri.TryCreate(configuration.GetValue<string>("Swagger:Contact:Url"), UriKind.Absolute, out uri);
+                Uri.TryCreate(configuration.GetValue<string>("Swagger:Contact:Url"), UriKind.Absolute, out var uri);
                 swaggerDoc.Contact = new OpenApiContact()
                 {
                     Name = configuration.GetValue<string>("Swagger:Contact:Name"),
@@ -32,6 +35,11 @@ namespace Fraud.Component.Utilities.DependencyInjection
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc(swaggerDoc.Version, swaggerDoc);
+                c.EnableAnnotations();
+                c.TagActionsBy(d => new List<string> { d.GroupName });
+                c.IncludeXmlComments(CommentsDocPath);
+                setupAction?.Invoke(c);
+
                 if (jwtAuth)
                 {
                     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
@@ -40,7 +48,7 @@ namespace Fraud.Component.Utilities.DependencyInjection
                             "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
                         Name = "Authorization",
                         In = ParameterLocation.Header,
-                        Type = SecuritySchemeType.ApiKey,
+                        Type = SecuritySchemeType.Http,
                         Scheme = "Bearer",
 
                     });

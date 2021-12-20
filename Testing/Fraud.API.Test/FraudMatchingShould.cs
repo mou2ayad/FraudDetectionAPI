@@ -217,6 +217,7 @@ namespace Fraud.API.Test
                 .UseConfiguration(new ConfigurationBuilder()
                     .SetBasePath(TestContext.CurrentContext.TestDirectory)
                     .AddJsonFile("appsettings.json")
+                    .AddJsonFile("appsettings.Development.json")
                     .Build()
                 );
 

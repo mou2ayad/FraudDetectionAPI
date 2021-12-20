@@ -4,7 +4,6 @@ using System.Net;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
@@ -12,14 +11,15 @@ namespace Fraud.Component.Utilities.ErrorHandling
 {
     public static class ExceptionMiddlewareExtention
     {
-       public static void ConfigurErrorHandler(this IApplicationBuilder app, ILogger log, string appName,IConfiguration config)
+
+        public static IApplicationBuilder UseFraudErrorHandler(this IApplicationBuilder app, ILogger log, string appName, bool isDevelopment)
         {
             app.UseExceptionHandler(appError => {
                 appError.Run(async context => {
-                  
+
                     context.Response.ContentType = "application/json";
                     var contextFeature = context.Features.Get<IExceptionHandlerFeature>();
-                    if (contextFeature!=null)
+                    if (contextFeature != null)
                     {
                         Exception exception = contextFeature.Error;
                         if (contextFeature.Error is AggregateException)
@@ -35,8 +35,8 @@ namespace Fraud.Component.Utilities.ErrorHandling
                             };
                         }
                         else
-                        {                           
-                        
+                        {
+
                             context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
                             errorDetails = new HttpExceptionDetails()
                             {
@@ -44,13 +44,13 @@ namespace Fraud.Component.Utilities.ErrorHandling
                                 ErrorMessage = "Internal Server Error"
                             };
 
-                        }                      
+                        }
 
-                        if (config.GetValue<string>("GlobalFramework:EnvType")!= "Prod" && !exception.IsClientException())
+                        if (isDevelopment && !exception.IsClientException())
                             errorDetails.ErrorMessage = exception.ToString();
-                        
-                        if(exception.IsWithNoLog())                     
-                            errorDetails.WithNolog();                        
+
+                        if (exception.IsWithNoLog())
+                            errorDetails.WithNolog();
                         else
                         {
                             var parameters = JsonConvert.SerializeObject(context.Request.Query.ToDictionary(x => x.Key, x => x.Value.ToString()));
@@ -63,13 +63,13 @@ namespace Fraud.Component.Utilities.ErrorHandling
                                 log.LogError(exception, "ErorrCode:{0} Service:{1} Path:{2} Parameters:{3}\n Exception=> ", errorDetails.ErrorCode, appName, context.Request.Path.Value, parameters);
 
                             }
-                               
+
                         }
                         await context.Response.WriteAsync(errorDetails.ToString());
                     }
                 });
             });
-
+            return app;
         }
     }
 }

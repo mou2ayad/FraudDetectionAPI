@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 using Fraud.Component.Common.Contracts;
 
 namespace Fraud.Component.Common.Models
 {
-    public class Person : IEquatable<Person>, IMatchable
+    public class Person : IMatchable<Person>, ICacheable
     {
         public Person(string firstName, string lastName, DateTime? dateOfBirth = null,
             string identificationNumber = null)
@@ -37,11 +38,16 @@ namespace Fraud.Component.Common.Models
             return Equals((Person) obj);
         }
 
-        public override int GetHashCode()
+        public override int GetHashCode() =>
+            HashCode.Combine(FirstName, LastName, DateOfBirth, IdentificationNumber);
+
+        public string GetCacheKey()
         {
-            return HashCode.Combine(FirstName, LastName, DateOfBirth, IdentificationNumber);
+            string dob = DateOfBirth.HasValue ? DateOfBirth.Value.ToString("yyyyMMdd") : string.Empty;
+            return $"{FirstName}_{LastName}_{dob}_{IdentificationNumber}";
         }
 
+        [JsonIgnore]
         public IEnumerable<string> OrderedPropertiesToMatch =>
             new[]
             {

@@ -8,7 +8,7 @@ namespace Fraud.Component.Utilities.DependencyInjection
 {
     public static class SwaggerExtension
     {
-        public static void InjectSwaggerServices(this IServiceCollection services, string apiTitle, IConfiguration configuration)
+        public static IServiceCollection AddSwaggerService(this IServiceCollection services, string apiTitle, IConfiguration configuration)
         {
 
             OpenApiInfo swaggerDoc = new OpenApiInfo()
@@ -65,6 +65,7 @@ namespace Fraud.Component.Utilities.DependencyInjection
                     });
                 }
             });
+            return services;
         }
     }
 }

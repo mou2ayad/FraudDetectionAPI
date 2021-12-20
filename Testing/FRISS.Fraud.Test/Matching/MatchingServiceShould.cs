@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using FluentAssertions;
 using Fraud.Component.Common.Models;
 using Fraud.Component.Matching.Configuration;
@@ -16,24 +17,24 @@ namespace Fraud.Test.Matching
         public MatchingServiceShould() => FillMatchingRules();
 
         [Test]
-        public void Match_first_and_last_names_only()
+        public async Task Match_first_and_last_names_onlyAsync()
         {
             var sut = Sut();
             var firstPerson = PersonBuilder.Create("Andrew", "Craw").With(DateTime.Parse("1985-02-20")).Build();
             var secondPerson = PersonBuilder.Create("Andrew", "Craw").Build();
 
-            decimal matchingScore = sut.Match(firstPerson, secondPerson);
+            decimal matchingScore =await sut.Match(firstPerson, secondPerson);
 
             matchingScore.Should().Be(60);
         }
         [Test]
-        public void Match_Date_of_Birth_only()
+        public async Task Match_Date_of_Birth_onlyAsync()
         {
             var sut = Sut();
             var firstPerson = PersonBuilder.Create("Andrew", "Craw").With(DateTime.Parse("1985-02-20")).Build();
             var secondPerson = PersonBuilder.Create("Petty", "Smith").With(DateTime.Parse("1985-02-20")).Build();
 
-            decimal matchingScore = sut.Match(firstPerson, secondPerson);
+            decimal matchingScore = await sut.Match(firstPerson, secondPerson);
 
             matchingScore.Should().Be(40);
         }
@@ -41,25 +42,25 @@ namespace Fraud.Test.Matching
         [TestCase("A.",Description = "similarity in first name (initials)")]
         [TestCase("Andew", Description = "similarity in first name (typo)")]
         [TestCase("Andy", Description = "similarity in first name (diminutive)")]
-        public void Match_Date_of_Birth_and_last_name_with_similar_firstName(string secondPersonName)
+        public async Task Match_Date_of_Birth_and_last_name_with_similar_firstNameAsync(string secondPersonName)
         {
             var sut = Sut();
             var firstPerson = PersonBuilder.Create("Andrew", "Craw").With(DateTime.Parse("1985-02-20")).Build();
             var secondPerson = PersonBuilder.Create(secondPersonName, "Craw").With(DateTime.Parse("1985-02-20")).Build();
 
-            decimal matchingScore = sut.Match(firstPerson, secondPerson);
+            decimal matchingScore = await sut.Match(firstPerson, secondPerson);
 
             matchingScore.Should().Be(95);
         }
 
         [Test]
-        public void Match_identification_number_mainly()
+        public async Task Match_identification_number_mainlyAsync()
         {
             var sut = Sut();
             var firstPerson = PersonBuilder.Create("Andrew", "Craw").With(DateTime.Parse("1985-02-20")).With("931212312").Build();
             var secondPerson = PersonBuilder.Create("Petty", "Smith").With(DateTime.Parse("1985-02-20")).With("931212312").Build();
 
-            decimal matchingScore = sut.Match(firstPerson, secondPerson);
+            decimal matchingScore =await sut.Match(firstPerson, secondPerson);
 
             matchingScore.Should().Be(100);
         }
@@ -67,14 +68,14 @@ namespace Fraud.Test.Matching
         [TestCase("A.",8, Description = "similarity in first name (initials) with 8 as expected score")]
         [TestCase("Andew",15, Description = "similarity in first name (typo) with 15 as expected score")]
         [TestCase("Andy",10, Description = "similarity in first name (diminutive) with 10 as expected score")]
-        public void Match_similar_firstName_with_diff_similarity_rules_values(string secondPersonName,decimal expectedMatchScore)
+        public async Task Match_similar_firstName_with_diff_similarity_rules_valuesAsync(string secondPersonName,decimal expectedMatchScore)
         {
             OverrideSimilarityRulesValues();
             var sut = Sut();
             var firstPerson = PersonBuilder.Create("Andrew", "Craw").Build();
             var secondPerson = PersonBuilder.Create(secondPersonName, "Smith").Build();
 
-            decimal matchingScore = sut.Match(firstPerson, secondPerson);
+            decimal matchingScore = await sut.Match(firstPerson, secondPerson);
 
             matchingScore.Should().Be(expectedMatchScore);
         }

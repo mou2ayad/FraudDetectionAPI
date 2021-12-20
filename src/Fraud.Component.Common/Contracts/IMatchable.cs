@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Fraud.Component.Common.Contracts
 {
-    public interface IMatchable
+    public interface IMatchable<T> : IEquatable<T>
     {
         IEnumerable<string> OrderedPropertiesToMatch { get; }
     }

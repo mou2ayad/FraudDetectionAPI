@@ -2,7 +2,11 @@
 {
     public class SimilarityRule
     {
-        private SimilarityRule(SimilarityServiceType similarityType, decimal similarityScore)
+        public SimilarityRule()
+        {
+            
+        }
+        public SimilarityRule(SimilarityServiceType similarityType, decimal similarityScore)
         {
             SimilarityType = similarityType;
             SimilarityScore = similarityScore;

@@ -9,15 +9,20 @@ namespace Fraud.Component.Utilities.DependencyInjection
 {
     public static class CacheInjectionExtension
     {
-        public static void InjectCacheService(this IServiceCollection services,IConfiguration configuration)
+        public static IServiceCollection AddCacheService(this IServiceCollection services,IConfiguration configuration)
         {
             if (configuration.GetValue<bool>("IsLocalEnv"))
+            {
                 services.AddSingleton<ICache, InMemoryCache>();
+
+            }
             else
-                services.AddSharedCache(configuration);
+                services.AddDistributedCacheCache(configuration);
+
+            return services;
 
         }
-        private static void AddSharedCache(this IServiceCollection container, IConfiguration configuration)
+        private static void AddDistributedCacheCache(this IServiceCollection container, IConfiguration configuration)
         {
             container.AddTransient<ICache, DistributedCache>();
             container.AddEnyimMemcached(o => o.Servers = new List<Server>

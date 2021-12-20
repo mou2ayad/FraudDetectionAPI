@@ -5,11 +5,11 @@ namespace Fraud.Component.Utilities.Swagger
 {
     public static class SwaggerMiddlewareExtension
     {
-        public static void UseSwaggerMiddleware(this IApplicationBuilder app, string apiName, IConfiguration configuration)
+        public static IApplicationBuilder UseSwaggerMiddleware(this IApplicationBuilder app, string apiName, IConfiguration configuration)
         {
 
-            var EnvironmentType = "";
-            if (EnvironmentType.ToLower() != "prod")
+            var environmentType = configuration.GetValue<string>("EnvironmentType");
+            if (environmentType.ToLower() != "prod")
             {
                 string version = configuration.GetValue<string>("Swagger:SwaggerDocs:Version") ?? "v1";
                 string swaggerEndpointUrl = $"/swagger/{version}/swagger.json";
@@ -22,6 +22,8 @@ namespace Fraud.Component.Utilities.Swagger
                     c.RoutePrefix = routePrefix;
                 });
             }
+
+            return app;
 
         }
 

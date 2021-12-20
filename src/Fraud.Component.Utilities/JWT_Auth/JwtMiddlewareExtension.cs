@@ -4,7 +4,10 @@ namespace Fraud.Component.Utilities.JWT_Auth
 {
     public static class JwtMiddlewareExtension
     {
-        public static void UseJwtMiddleware(this IApplicationBuilder app) =>
-          app.UseMiddleware<JwtMiddleware>();
+        public static IApplicationBuilder UseJwtMiddleware(this IApplicationBuilder app)
+        {
+            app.UseMiddleware<JwtMiddleware>();
+            return app;
+        }
     }
 }

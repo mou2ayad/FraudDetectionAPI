@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Enyim.Caching;
+using Fraud.Component.Utilities.Logger;
 using Microsoft.Extensions.Logging;
 
 namespace Fraud.Component.Utilities.Cache
@@ -18,11 +19,18 @@ namespace Fraud.Component.Utilities.Cache
 
         public async Task<T> Get<T>(string key)
         {
-            var value = await _cachedClient.GetValueAsync<T>(key);
-            if (value == null)
-                _logger.LogInformation("{@name} {@key} is not found in distributed Cache", typeof(T).Name, key);
-
-            return value;
+            try
+            {
+                var value = await _cachedClient.GetValueAsync<T>(key);
+                if (value == null)
+                    _logger.LogInformation("{@name} {@key} is not found in distributed Cache", typeof(T).Name, key);
+                return value;
+            }
+            catch (Exception e)
+            {
+                _logger.LogErrorDetails(e,key);
+                return await Task.FromResult(default(T));
+            }
         }
 
         public async Task Set<T>(string key, T value, TimeSpan expirationTime)

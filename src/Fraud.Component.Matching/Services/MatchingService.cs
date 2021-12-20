@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Fraud.Component.Common.Contracts;
 using Fraud.Component.Matching.Contracts;
 using Fraud.Component.Matching.Models;
 
 namespace Fraud.Component.Matching.Services
 {
-    public class MatchingService<T> where T :IMatchable
+    public class MatchingService<T> : IMatchingService<T> where T :IMatchable<T>
     {
         private readonly IEnumerable<INameSimilarity> _similarityServices;
         public MatchingService(IEnumerable<INameSimilarity> similarityServices)
@@ -15,7 +16,7 @@ namespace Fraud.Component.Matching.Services
 
         private INameSimilarity GetSimilarityService(SimilarityServiceType similarityServiceType)
             => _similarityServices.FirstOrDefault(e => e.Type == similarityServiceType);
-        public decimal Match(T first, T second)
+        public Task<decimal> Match(T first, T second)
         {
             decimal matchingScore = 0;
             var propNames = first.OrderedPropertiesToMatch;
@@ -46,7 +47,7 @@ namespace Fraud.Component.Matching.Services
                     break;
             }
 
-            return matchingScore;
+            return Task.FromResult(matchingScore);
         }
     }
 }

@@ -4,7 +4,11 @@ namespace Fraud.Component.Matching.Models
 {
     public class MatchingRule
     {
-        private MatchingRule(string propertyName, decimal matchingScore)
+        public MatchingRule()
+        {
+        }
+
+        public MatchingRule(string propertyName, decimal matchingScore)
         {
             PropertyName = propertyName;
             MatchingScore = matchingScore;

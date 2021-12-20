@@ -6,7 +6,10 @@ namespace Fraud.Component.Utilities.DependencyInjection
 {
     public static class JwtInjectionExtension
     {
-        public static void InjectJwtService(this IServiceCollection services,IConfiguration configuration) =>    
+        public static IServiceCollection AddJwtService(this IServiceCollection services, IConfiguration configuration)
+        {
             services.Configure<JwtSettings>(configuration.GetSection("JWT"));
+            return services;
+        }
     }
 }

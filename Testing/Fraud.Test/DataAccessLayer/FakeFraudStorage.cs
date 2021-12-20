@@ -30,7 +30,6 @@ namespace Fraud.Test.DataAccessLayer
             CallGetPerson = true;
             return Task.FromResult(Db.FirstOrDefault(e => e.Id == id));
         }
-        
 
         public FakeFraudStorage With(PersonDao personDao)
         {
@@ -39,10 +38,4 @@ namespace Fraud.Test.DataAccessLayer
         } 
     }
 
-    public class SpyFraudStorage : FakeFraudStorage
-    {
-        public bool IsGetPersonByIdCalled { private set; get; }
-
-        public bool IsInsertPersonCalled { private set; get; }
-    }
 }

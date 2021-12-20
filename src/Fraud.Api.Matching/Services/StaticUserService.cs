@@ -13,13 +13,11 @@ namespace Fraud.Api.Matching.Services
         {
             _users = new List<UserClient>
             {
-                new UserClient { Id = 1, UserName = "admin", Password = "admin", Permissions = new List<string>() { "IO" } },
-                new UserClient { Id = 2, UserName = "test", Password = "test", Permissions = new List<string>() { } }
+                new () { Id = 1, UserName = "admin", Password = "admin", Permissions = new List<string> { "IO" } },
+                new () { Id = 2, UserName = "test", Password = "test", Permissions = new List<string>()}
             };
         }
-        public override UserClient Login(string userName, string password)
-        {
-            return _users.SingleOrDefault(x => x.UserName.ToLower() == userName.ToLower() && x.Password == password);
-        }
+        public override UserClient Login(string userName, string password) => 
+            _users.SingleOrDefault(x => x.UserName.ToLower() == userName.ToLower() && x.Password == password);
     }
 }

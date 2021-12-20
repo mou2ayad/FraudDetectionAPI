@@ -24,8 +24,6 @@ namespace Fraud.Component.Utilities.Swagger
             }
 
             return app;
-
         }
-
     }
 }

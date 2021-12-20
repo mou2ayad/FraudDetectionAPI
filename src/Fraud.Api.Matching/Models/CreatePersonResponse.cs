@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Fraud.Api.Matching.Models
+﻿namespace Fraud.Api.Matching.Models
 {
     public class CreatePersonResponse
     {

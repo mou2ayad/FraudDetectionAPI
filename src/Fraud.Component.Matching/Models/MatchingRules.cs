@@ -25,9 +25,5 @@ namespace Fraud.Component.Matching.Models
             return null;
         }
 
-        public static void Clear()
-        {
-            Rules.Clear();
-        }
     }
 }

@@ -17,7 +17,7 @@ namespace Fraud.Api.Matching
 
             try
             {
-                logger.Info("init new instance from Cryptocyrrency API");
+                logger.Info("init new instance from FraudMatching API");
                 CreateHostBuilder(args).Build().Run();
             }
             catch (Exception ex)

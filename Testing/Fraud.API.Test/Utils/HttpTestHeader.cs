@@ -1,4 +1,4 @@
-﻿namespace Fraud.API.Test
+﻿namespace Fraud.API.Test.Utils
 {
     public class HttpTestHeader
     {

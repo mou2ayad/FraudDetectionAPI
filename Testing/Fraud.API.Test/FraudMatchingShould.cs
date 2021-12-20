@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using FluentAssertions;
 using Fraud.Api.Matching;
 using Fraud.Api.Matching.Models;
+using Fraud.API.Test.Utils;
 using Fraud.Component.Matching.Models;
 using Fraud.Component.Utilities.ErrorHandling;
 using Fraud.Component.Utilities.JWT_Auth;
@@ -28,7 +29,7 @@ namespace Fraud.API.Test
             var header=await Login(testClient);
 
             var createPersonResponse= await testClient.Post<CreatePersonResponse>("api/v1/Person/Create",
-                RequestsExamples.CreatePersonRequestExample(), header);
+                PersonRequestExample(), header);
 
             createPersonResponse.Should().NotBeNull();
             createPersonResponse.PersonId.Should().NotBeNullOrEmpty();
@@ -39,7 +40,7 @@ namespace Fraud.API.Test
         {
             var testClient = HttpClient();
             var header = await Login(testClient);
-            var personRequest = RequestsExamples.CreatePersonRequestExample();
+            var personRequest = PersonRequestExample();
             personRequest.FirstName = null;
             var responseMessage = await testClient.Post("api/v1/Person/Create", personRequest, header);
             var errorDetails = await responseMessage.Content.ReadFromJsonAsync<ExceptionDetails>();
@@ -55,7 +56,7 @@ namespace Fraud.API.Test
         {
             var testClient = HttpClient();
             var header = await Login(testClient);
-            var personRequest = RequestsExamples.CreatePersonRequestExample();
+            var personRequest = PersonRequestExample();
             personRequest.LastName = null;
             var responseMessage = await testClient.Post("api/v1/Person/Create", personRequest, header);
             var errorDetails = await responseMessage.Content.ReadFromJsonAsync<ExceptionDetails>();
@@ -71,7 +72,7 @@ namespace Fraud.API.Test
             var testClient = HttpClient();
 
             var createPersonResponse = await testClient.Post("api/v1/Person/Create",
-                RequestsExamples.CreatePersonRequestExample());
+                PersonRequestExample());
 
             createPersonResponse.StatusCode.Should().Be(401);
         }
@@ -82,7 +83,7 @@ namespace Fraud.API.Test
             var testClient = HttpClient();
 
             var createPersonResponse = await testClient.Post("api/v1/Person/Create",
-                RequestsExamples.CreatePersonRequestExample(), GetAuthHeader("wrong token"));
+                PersonRequestExample(), GetAuthHeader("wrong token"));
 
             createPersonResponse.StatusCode.Should().Be(401);
         }
@@ -95,7 +96,7 @@ namespace Fraud.API.Test
             var header = await Login(testClient);
 
             var matchingResponse = await testClient.Post<MatchingResponse>("api/v1/Fraud/Match",
-                RequestsExamples.MatchRequestExample(), header);
+                MatchRequestExample(), header);
 
             matchingResponse.Should().NotBeNull();
             matchingResponse.MatchingScore.Should().Be(55);
@@ -109,7 +110,7 @@ namespace Fraud.API.Test
             var header = await Login(testClient);
             ClearMatchingRules();
             var matchingResponse = await testClient.Post<MatchingResponse>("api/v1/Fraud/Match",
-                RequestsExamples.MatchRequestExample(), header);
+                MatchRequestExample(), header);
 
             matchingResponse.Should().NotBeNull();
             matchingResponse.MatchingScore.Should().Be(40);
@@ -123,7 +124,7 @@ namespace Fraud.API.Test
             var header = await Login(testClient);
             ChangeNickNameSimilarityRuleScore(5);
             var matchingResponse = await testClient.Post<MatchingResponse>("api/v1/Fraud/Match",
-                RequestsExamples.MatchRequestExample(), header);
+                MatchRequestExample(), header);
 
             matchingResponse.Should().NotBeNull();
             matchingResponse.MatchingScore.Should().Be(45);
@@ -135,7 +136,7 @@ namespace Fraud.API.Test
             var testClient = HttpClient();
             var header = await Login(testClient);
 
-            var request = RequestsExamples.MatchRequestExample();
+            var request = MatchRequestExample();
             request.First = null;
             var responseMessage = await testClient.Post("api/v1/Fraud/Match", request, header);
 
@@ -152,7 +153,7 @@ namespace Fraud.API.Test
             var testClient = HttpClient();
             var header = await Login(testClient);
 
-            var request = RequestsExamples.MatchRequestExample();
+            var request = MatchRequestExample();
             request.First = null;
             request.Second = null;
             var responseMessage = await testClient.Post("api/v1/Fraud/Match", request, header);
@@ -170,7 +171,7 @@ namespace Fraud.API.Test
             var testClient = HttpClient();
             var header = await Login(testClient);
 
-            var request = RequestsExamples.MatchRequestExample();
+            var request = MatchRequestExample();
             request.First=PersonBuilder.Create(null,"someLastName").Build();
             var responseMessage = await testClient.Post("api/v1/Fraud/Match", request, header);
 
@@ -229,6 +230,7 @@ namespace Fraud.API.Test
 
         private static TestClient HttpClient() => Create(container =>
         {
+            // in case we want to override some services in the container , we can do here
         });
 
         private static void ClearMatchingRules() => MatchingRules.Get("FirstName").SimilarityRules=null;
@@ -237,5 +239,18 @@ namespace Fraud.API.Test
             MatchingRules.Get("FirstName").SimilarityRules
                 .First(e => e.SimilarityType == SimilarityServiceType.NickName).SimilarityScore = score;
 
+        public static CreatePersonRequest PersonRequestExample()=> new()
+        {
+            DateOfBirth = DateTime.Parse("1985-02-20"),
+            FirstName = "Andrew",
+            LastName = "Craw",
+            IdentificationNumber = "931212312"
+        };
+
+        public static MatchingRequest MatchRequestExample() => new()
+        {
+            First = PersonBuilder.Create("Andrew", "Craw").With(DateTime.Parse("1985-02-20")).With("931212312").Build(),
+            Second = PersonBuilder.Create("Andy", "Smith").With(DateTime.Parse("1985-02-20")).With("931212311").Build()
+        };
     }
 }

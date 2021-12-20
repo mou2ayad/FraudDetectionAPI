@@ -12,10 +12,7 @@ namespace Fraud.Component.Utilities.DependencyInjection
         public static IServiceCollection AddCacheService(this IServiceCollection services,IConfiguration configuration)
         {
             if (configuration.GetValue<bool>("IsLocalEnv"))
-            {
                 services.AddSingleton<ICache, InMemoryCache>();
-
-            }
             else
                 services.AddDistributedCacheCache(configuration);
 

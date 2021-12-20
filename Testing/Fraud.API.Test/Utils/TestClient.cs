@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.TestHost;
 using Newtonsoft.Json;
 
-namespace Fraud.API.Test
+namespace Fraud.API.Test.Utils
 {
     public class TestClient
     {

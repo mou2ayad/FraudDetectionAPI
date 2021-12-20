@@ -25,8 +25,8 @@ The API can be tested using Swagger directly without needing to use postman or f
  it is POST request, it is needed to generate the bearer token, We can use this JSON to login and get the required permission  
 ```Request Body Example
 {
-      "username": "**admin**",
-      "password": "**admin**"
+      "username": "admin",
+      "password": "admin"
 }
 ```
 > **Note:By calling the endpoints using swagger, no need to add "bearer" in front of the token, it is automatically appended to the token**

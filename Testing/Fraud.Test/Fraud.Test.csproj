@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\Fraud.Api.Matching\Fraud.Api.Matching.csproj" />
     <ProjectReference Include="..\..\src\Fraud.Component.DataAccessLayer\Fraud.Component.DataAccessLayer.csproj" />
     <ProjectReference Include="..\..\src\Fraud.Component.Matching\Fraud.Component.Matching.csproj" />
     <ProjectReference Include="..\..\src\Fraud.Component.Utilities\Fraud.Component.Utilities.csproj" />

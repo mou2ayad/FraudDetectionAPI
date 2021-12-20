@@ -23,8 +23,11 @@ namespace Fraud.Component.Matching.Models
             if (Rules.TryGetValue(propertyName, out MatchingRule value))
                 return value;
             return null;
-        } 
+        }
 
-
+        public static void Clear()
+        {
+            Rules.Clear();
+        }
     }
 }

@@ -19,6 +19,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{9BDF
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fraud.Api.Matching", "src\Fraud.Api.Matching\Fraud.Api.Matching.csproj", "{C5C8B622-A945-4BE8-A6F4-02567C42BD42}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fraud.API.Test", "Testing\Fraud.API.Test\Fraud.API.Test.csproj", "{A7229E06-CF89-412E-9FEB-128EF7DCA963}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +51,10 @@ Global
 		{C5C8B622-A945-4BE8-A6F4-02567C42BD42}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C5C8B622-A945-4BE8-A6F4-02567C42BD42}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C5C8B622-A945-4BE8-A6F4-02567C42BD42}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7229E06-CF89-412E-9FEB-128EF7DCA963}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7229E06-CF89-412E-9FEB-128EF7DCA963}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7229E06-CF89-412E-9FEB-128EF7DCA963}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7229E06-CF89-412E-9FEB-128EF7DCA963}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -60,6 +66,7 @@ Global
 		{EC335374-6435-4770-A2C7-94DB0550885D} = {6D8C8E02-6F04-45E1-A4DD-E54E35308DDB}
 		{FED7D4CB-6D6B-4F73-B74F-D03593A75683} = {6D8C8E02-6F04-45E1-A4DD-E54E35308DDB}
 		{C5C8B622-A945-4BE8-A6F4-02567C42BD42} = {6D8C8E02-6F04-45E1-A4DD-E54E35308DDB}
+		{A7229E06-CF89-412E-9FEB-128EF7DCA963} = {9BDF9A24-167F-451A-9F37-473D683B9C5A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0E6C6B16-6404-4472-B252-7842164182FA}

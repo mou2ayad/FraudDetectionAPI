@@ -23,11 +23,13 @@ it has its own lookup database for matching purposes
 The API can be tested using Swagger directly without needing to use postman or fiddler 
  > - Authentication Endpoint : https://localhost:44326/api/authentication/token
  it is POST request, it is needed to generate the bearer token, We can use this JSON to login and get the required permission  
-    {
-      "username": "**admin**",
-      "password": "**admin**"
-    }
->
+```Request Body Example
+{
+      "username": "admin",
+      "password": "admin"
+}
+```
+> **Note:By calling the endpoints using swagger, no need to add "bearer" in front of the token, it is automatically appended to the token**
 > - CreatePerson Endpoint : https://localhost:44326/api/v1/Person/Create , Post request,we need to use the generated auth token from the Authentication endpoint, and pass it to the header of this request as following 
    "bearer {*token*}" 
 ```Request Body example

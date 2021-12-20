@@ -45,7 +45,7 @@ namespace Fraud.Component.Utilities.DependencyInjection
                     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                     {
                         Description =
-                            "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
+                            "JWT Authorization header using the Bearer scheme",
                         Name = "Authorization",
                         In = ParameterLocation.Header,
                         Type = SecuritySchemeType.Http,

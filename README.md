@@ -1,39 +1,60 @@
 ## The Solution consists of these Projects
 
- #### 1. App.Components.Contracts:
- > Class Library project (.net standard), it contains the main interface of the Exchange Rate Provider and the ExchangeRateList object 
- #### 2. App.Components.Utilities
+ #### 1. Fraud.Component.Common:
+ > Class Library project (.net standard), it contains the main common interfaces and models we use in the other projects
+ #### 2. Fraud.Component.Utilities
  > Class Library project (.net standard), it is a shared component, doesn't cover any business logic, practically it doesn't belong to any specific solution, it can be used in any other solution.
-it provides the Error handling, Logging, CustomExceptions, JWT, Swagger and RecurringJobs features to any .net solution
+it provides the Error handling, Logging (NLog), CustomExceptions, JWT, Swagger and Caching(in-memory and distributed Cache using **Memcached**) features to any .net solution
+ #### 3. Fraud.Component.DataAccessLayer
+> Class Library project (.net standard), it is used to comunicate with databases (it can be MongoDb,Sql, or any other fake db) 
+#### 4. Fraud.Component.Matching
+> Class Library project (.net standard), it is used to provide matching services based on configurable matching and similarity rules
+it has its own lookup database for matching purposes 
+ #### 5. Fraud.Test
+ > .net Core 5 NUnit test, contains the unit test project of Fraud.Component.DataAccessLayer and Fraud.Component.Matching projects (Project 3+4)
 
- #### 3. App.Components.CoinmarketcapApiClient
-> Class Library project (.net standard), it is the integration with Coinmarketcap Api 
- #### 4. App.Testing.CoinmarketcapAPIClientTest
- > .net Core 3.1 xUnit test, contains the unit test project of App.Components.CoinmarketcapApiClient project (Project 3)
- #### 5. App.Components.ExchangeratesApiClient
- > Class Library project (.net standard), it is the integration with Exchangerates.io Api
- #### 6. App.Testing.ExchangeratesAPIClientTest
- > .net Core 3.1 xUnit test, contains the unit test project of App.Components.ExchangeratesApiClient project (Project 5)
+#### 6. Fraud.API.Test
+ > .net Core NUnit test, to test the api endpoints including middleware (AuthenticationMiddleware and ErrorHandlingMiddleware)
  
-#### 7. App.Services.CryptocurrencyExchangerAPI
-> .net Core 3.1 RESTful API, it is the Startup project and the final user front API
+#### 7. Fraud.Api.Matching
+> .net Core 5 RESTful API, it is the Startup project and the final user front API
 >
-> - Swagger URL : https://localhost:44390/swagger/index.html
-The API can be tested using Swagger directly without needing yo use postman or fiddler 
- > - Authentication Endpoint : https://localhost:44390/api/authentication/token
+> - Swagger URL : https://localhost:44326/swagger/index.html
+The API can be tested using Swagger directly without needing to use postman or fiddler 
+ > - Authentication Endpoint : https://localhost:44326/api/authentication/token
  it is POST request, it is needed to generate the bearer token, We can use this JSON to login and get the required permission  
     {
-      "username": "**knab**",
-      "password": "**knab2021**"
+      "username": "**admin**",
+      "password": "**admin**"
     }
 >
-> - Quotes Endpoint : https://localhost:44390/api/v1/cryptocurrency/quotes/{*symbol*} , GET request, we need to use the generated auth token from the previous endpoint, and pass it to the header of this request as following 
+> - CreatePerson Endpoint : https://localhost:44326/api/v1/Person/Create , Post request,we need to use the generated auth token from the Authentication endpoint, and pass it to the header of this request as following 
    "bearer {*token*}" 
-   >
-#### 8. App.Testing.CryptocurrencyExchangerAPITest
- > .Net Core 3.1 xUnit test, contains:
- >  - The unit test project of the services of App.Components.CryptocurrencyExchangerAPI project (Project 8)
- >  - Integration Test to the final RESTful API CryptocurrencyExchangerAPI
-
-
- 
+```Request Body example
+{
+  "firstName": "Andrew",
+  "lastName": "Craw",
+  "dateOfBirth": "2021-12-19",
+  "identificationNumber": "931212312"
+}
+```
+> - GetPerson Endpoint : https://localhost:44326/api/v1/Person/{id} , Get request, we need to use the generated auth token from the Authentication endpoint, and pass it to the header of this request as following 
+   "bearer {*token*}" 
+>   
+> - Matching two persons Endpoint : https://localhost:44326/api/v1/Fraud/Match , Post request, we need to use the generated auth token from the Authentication endpoint, and pass it to the header of this request as following 
+   "bearer {*token*}" 
+>```Request Body Example
+{
+  "first": {
+  "firstName": "Andy",
+  "lastName": "Crao",
+  "dateOfBirth": "2021-12-19",
+  "identificationNumber": "931212311"
+},
+  "second": {
+  "firstName": "Andrew",
+  "lastName": "Craw",
+  "dateOfBirth": "2021-12-18",
+  "identificationNumber": "931212312"
+}
+```

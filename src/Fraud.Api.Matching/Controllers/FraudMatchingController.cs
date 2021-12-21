@@ -10,9 +10,7 @@ using Swashbuckle.AspNetCore.Annotations;
 
 namespace Fraud.Api.Matching.Controllers
 {
-    /// <summary>
-    /// 
-    /// </summary>
+
     [ApiController]
     [Produces("application/json")]
     [Consumes("application/json")]

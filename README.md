@@ -1,30 +1,4 @@
 
-## The code coverage
-
-As requested, this solution covers the main mandatory 2 points and most of the additional points
- #### -  Main Requested Endpoints:
->  1. **Receives and stores a person**
->  2. **Calculates** the probability that 2 persons are the same physical person: Here I didn't want to create a simple Matching service that matches  only Person type based on fixed properties, so I tried to show more skills by building a smart MatchingService that can Match any type of objects based on "Matching" and "Similarity" configs, for example, we can use this to Match 2 persons,  2 addresses, or 2 organizations ... etc.
->  
- #### -  The Additional Requests :
- >  1. **Logging**: I used NLog to log (info, warnings, errors),  and also created ExceptionMiddleware to handle any unhandled error from the API and recognize the type of the error ( Client Error "Bad Request", or internal server error) and log the entire error details along with the parameter that caused this error in order to reproduce the issue and to facilitate the troubleshooting process, and finally, it returns a general error message to the client if the environment is Production otherwise it returns the full error details to the developer in a non-Prod environment 
- >  2. **Documentation**: I used Swagger for that
- >  3. **Security**: I used JWT for the security with simple userService to check the username/password, and added an endpoint to generate the JWT token in order to use it to call the other endpoint, I didn't use the Microsoft built-In attributes/middleware to check the Authentication in the endpoint, I rathered to create the required jwt middleware and attribute manually to show that I have a good understanding of JWT authentication concept
- >   4. **Request caching**: I created 2 flavours of caching, MemoryCache and Distributed Cache using Memcached in case we need to run the api through LoadBalancer in multiple nodes
- >   5. **Matching rules are configurable**:  The Matching rules are fully configurable, and can be updated during runtime, and also it can be created easily, where I used Builder pattern to create them along with Similarity rules , for Example:
- >   
-```Creating MatchingRules example
-MatchingRules.SetRange(
-                 MatchingRule.From("FirstName", 20).With(
-                    SimilarityRule.From(SimilarityServiceType.Initials, 15),
-                    SimilarityRule.From(SimilarityServiceType.NickName, 15),
-                    SimilarityRule.From(SimilarityServiceType.Typo, 15)
-                ),
-                MatchingRule.From("LastName", 40),
-                MatchingRule.From("DateOfBirth", 40),
-                MatchingRule.From("IdentificationNumber", 100));
-```
-
 ## The Solution consists of these Projects
 
  #### 1. Fraud.Component.Common:
